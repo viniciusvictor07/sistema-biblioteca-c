@@ -11,8 +11,12 @@ void salvarLivros(Livro biblioteca[], int totalLivros) {
     }
 
     for (int i = 0; i < totalLivros; i++) {
-        fprintf(arquivo, "%d;%s;%s;%d;%d\n", biblioteca[i].codigo, biblioteca[i].titulo, biblioteca[i].autor,
-                biblioteca[i].ano, biblioteca[i].disponivel);
+        fprintf(arquivo, "%d;%s;%s;%d;%d\n",
+                biblioteca[i].codigo,  //
+                biblioteca[i].titulo,  //
+                biblioteca[i].autor,   //
+                biblioteca[i].ano,     //
+                biblioteca[i].disponivel);
     }
 
     fclose(arquivo);
@@ -43,5 +47,6 @@ void carregarLivros(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
     }
 
     fclose(arquivo);
+    *proximoCodigo = maiorCodigo + 1;
     printf("\n[SUCESSO] %d livro(s) carregado(s) com sucesso!\n", *totalLivros);
 }
