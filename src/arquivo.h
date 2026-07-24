@@ -7,4 +7,4 @@
 #include "livros.h"
 
 void salvarLivros(Livro biblioteca[], int totalLivros);
-void carregarLivros(Livro biblioteca[], int *totalLivros);
+void carregarLivros(Livro biblioteca[], int *totalLivros, int *proximoCodigo);

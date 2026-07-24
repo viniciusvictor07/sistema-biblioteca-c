@@ -4,20 +4,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-void cadastrarLivro(Livro biblioteca[], int *totalLivros) {
+void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
     if (bibliotecaCheia(*totalLivros)) return;
 
     Livro novoLivro;
+    novoLivro.codigo = *proximoCodigo;
+    (*proximoCodigo)++;                 
 
     printf("\n--- CADASTRO DE NOVO LIVRO ---\n");
-    printf("Digite o codigo do livro: ");
-    scanf("%d", &novoLivro.codigo);
-    limparBuffer();
-
-    if (buscarIndicePorCodigo(biblioteca, *totalLivros, novoLivro.codigo) != -1) {
-        printf("\nJa existe um livro cadastrado com o codigo %d!\n", novoLivro.codigo);
-        return;
-    }
+    printf("Codigo: %d\n", novoLivro.codigo);
 
     printf("Digite o titulo: ");
     fgets(novoLivro.titulo, sizeof(novoLivro.titulo), stdin);
@@ -233,11 +228,6 @@ void exibirEstatisticas(Livro biblioteca[], int totalLivros) {
 }
 
 // Funções auxiliares
-void limparBuffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
 int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado) {
     for (int i = 0; i < totalLivros; i++) {
         if (biblioteca[i].codigo == codigoBuscado) {
@@ -261,4 +251,9 @@ int bibliotecaVazia(int totalLivros) {
         return 1;
     }
     return 0;
+}
+
+void limparBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }

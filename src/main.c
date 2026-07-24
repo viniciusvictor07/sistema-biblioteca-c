@@ -7,13 +7,14 @@
 int main() {
     Livro biblioteca[MAX_LIVROS];
     int totalLivros = 0;
+    int proximoCodigo = 1;
     int opcao;
 
-    carregarLivros(biblioteca, &totalLivros);
+    carregarLivros(biblioteca, &totalLivros, &proximoCodigo);
 
     do {
         printf("\n==========================================\n");
-        printf("SISTEMA DE GERENCIAMENTO DE BIBLIOTECA \n");
+        printf("  SISTEMA DE GERENCIAMENTO DE BIBLIOTECA \n");
         printf("==========================================\n");
         printf("1.  Cadastrar novo livro\n");
         printf("2.  Exibir todos os livros\n");
@@ -36,7 +37,7 @@ int main() {
         limparBuffer();
         switch (opcao) {
             case 1:
-                cadastrarLivro(biblioteca, &totalLivros);
+                cadastrarLivro(biblioteca, &totalLivros, &proximoCodigo);
                 break;
             case 2:
                 exibirTodosLivros(biblioteca, totalLivros);
