@@ -65,13 +65,7 @@ void buscarLivroPorCodigo(Livro biblioteca[], int totalLivros) {
         return;
     }
 
-    printf("\n--- LIVRO ENCONTRADO ---\n");
-    printf("Codigo: %d\n", biblioteca[indice].codigo);
-    printf("Titulo: %s\n", biblioteca[indice].titulo);
-    printf("Autor: %s\n", biblioteca[indice].autor);
-    printf("Ano: %d\n", biblioteca[indice].ano);
-    printf("Status: %s\n", biblioteca[indice].disponivel ? "Disponivel" : "Emprestado");
-    printf("------------------------\n");
+    exibirLivro(biblioteca[indice]);
 }
 
 void buscarLivroPorTitulo(Livro biblioteca[], int totalLivros) {
@@ -86,13 +80,7 @@ void buscarLivroPorTitulo(Livro biblioteca[], int totalLivros) {
     int encontrados = 0;
     for (int i = 0; i < totalLivros; i++) {
         if (strstr(biblioteca[i].titulo, tituloBuscado) != NULL) {
-            printf("\n--- LIVRO ENCONTRADO ---\n");
-            printf("Codigo: %d\n", biblioteca[i].codigo);
-            printf("Titulo: %s\n", biblioteca[i].titulo);
-            printf("Autor: %s\n", biblioteca[i].autor);
-            printf("Ano: %d\n", biblioteca[i].ano);
-            printf("Status: %s\n", biblioteca[i].disponivel ? "Disponivel" : "Emprestado");
-            printf("------------------------\n");
+            exibirLivro(biblioteca[i]);
             encontrados++;
         }
     }
@@ -254,6 +242,16 @@ int bibliotecaVazia(int totalLivros) {
         return 1;
     }
     return 0;
+}
+
+void exibirLivro(Livro livro) {
+    printf("\n=== LIVRO ENCONTRADO ===\n");
+    printf("Codigo: %d\n", livro.codigo);
+    printf("Titulo: %s\n", livro.titulo);
+    printf("Autor: %s\n", livro.autor);
+    printf("Ano: %d\n", livro.ano);
+    printf("Status: %s\n", livro.disponivel ? "Disponivel" : "Emprestado");
+    printf("=========================\n");
 }
 
 void limparBuffer() {

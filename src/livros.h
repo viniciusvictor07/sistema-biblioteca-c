@@ -28,6 +28,7 @@ void exibirEstatisticas(Livro biblioteca[], int totalLivros);
 int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado);
 int bibliotecaCheia(int totalLivros);
 int bibliotecaVazia(int totalLivros);
+void exibirLivro(Livro livro);
 void limparBuffer();
 
 #endif
