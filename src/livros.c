@@ -9,7 +9,7 @@ void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
 
     Livro novoLivro;
     novoLivro.codigo = *proximoCodigo;
-    (*proximoCodigo)++;                 
+    (*proximoCodigo)++;
 
     printf("\n--- CADASTRO DE NOVO LIVRO ---\n");
     printf("Codigo: %d\n", novoLivro.codigo);
@@ -40,14 +40,13 @@ void exibirTodosLivros(Livro biblioteca[], int totalLivros) {
 
     printf("\n=== LISTA DE LIVROS CADASTRADOS ===\n");
     for (int i = 0; i < totalLivros; i++) {
-        printf("\nLivro %d:\n", i + 1);
-        printf("  Codigo: %d\n", biblioteca[i].codigo);
-        printf("  Titulo: %s\n", biblioteca[i].titulo);
-        printf("  Autor: %s\n", biblioteca[i].autor);
-        printf("  Ano: %d\n", biblioteca[i].ano);
-        printf("  Status: %s\n", biblioteca[i].disponivel ? "Disponivel" : "Emprestado");
+        printf("Codigo: %d | Titulo: %s | Autor: %s | Ano: %d | Status: %s\n",
+               biblioteca[i].codigo,  //
+               biblioteca[i].titulo,  //
+               biblioteca[i].autor,   //
+               biblioteca[i].ano,     //
+               biblioteca[i].disponivel ? "Disponivel" : "Emprestado");
     }
-    printf("===================================\n");
 }
 
 void buscarLivroPorCodigo(Livro biblioteca[], int totalLivros) {
@@ -105,9 +104,11 @@ void buscarLivroPorTitulo(Livro biblioteca[], int totalLivros) {
 
 void atualizarLivro(Livro biblioteca[], int totalLivros) {
     if (bibliotecaVazia(totalLivros)) return;
-
     int codigoBuscado;
+
     printf("\n--- ATUALIZAR LIVRO ---\n");
+    exibirTodosLivros(biblioteca, totalLivros);
+    
     printf("Digite o codigo do livro que deseja atualizar: ");
     scanf("%d", &codigoBuscado);
     limparBuffer();
@@ -139,10 +140,12 @@ void atualizarLivro(Livro biblioteca[], int totalLivros) {
 
 void excluirLivro(Livro biblioteca[], int *totalLivros) {
     if (bibliotecaVazia(*totalLivros)) return;
-
     int codigoBuscado;
+
     printf("\n--- REMOVER LIVRO ---\n");
-    printf("Digite o codigo do livro que deseja remover: ");
+    exibirTodosLivros(biblioteca, *totalLivros);
+    
+    printf("\nDigite o codigo do livro que deseja remover: ");
     scanf("%d", &codigoBuscado);
     limparBuffer();
 
