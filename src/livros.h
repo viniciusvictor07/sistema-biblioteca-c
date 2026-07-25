@@ -26,9 +26,9 @@ void exibirEstatisticas(Livro biblioteca[], int totalLivros);
 
 // Funções auxiliares
 int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado);
+void lerString(char *buffer, int tamanho);
 int bibliotecaCheia(int totalLivros);
 int bibliotecaVazia(int totalLivros);
 void exibirLivro(Livro livro);
 void limparBuffer();
-
 #endif

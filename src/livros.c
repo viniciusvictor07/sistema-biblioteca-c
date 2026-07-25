@@ -9,21 +9,19 @@ void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
 
     Livro novoLivro;
     novoLivro.codigo = *proximoCodigo;
-    (*proximoCodigo)++;
-
+    
     printf("\n--- CADASTRO DE NOVO LIVRO ---\n");
     printf("Codigo: %d\n", novoLivro.codigo);
-
+    
     printf("Digite o titulo: ");
-    fgets(novoLivro.titulo, sizeof(novoLivro.titulo), stdin);
-    novoLivro.titulo[strcspn(novoLivro.titulo, "\n")] = '\0';
-
+    lerString(novoLivro.titulo, sizeof(novoLivro.titulo));
+    
     printf("Digite o autor: ");
-    fgets(novoLivro.autor, sizeof(novoLivro.autor), stdin);
-    novoLivro.autor[strcspn(novoLivro.autor, "\n")] = '\0';
-
+    lerString(novoLivro.autor, sizeof(novoLivro.autor));
+    
     printf("Digite o ano de publicacao: ");
     scanf("%d", &novoLivro.ano);
+    limparBuffer();
 
     printf("O livro esta disponivel? (1- Sim / 0- Nao): ");
     scanf("%d", &novoLivro.disponivel);
@@ -31,6 +29,7 @@ void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
 
     biblioteca[*totalLivros] = novoLivro;
     (*totalLivros)++;
+    (*proximoCodigo)++;
 
     printf("\nLivro cadastrado com sucesso!\n");
 }
@@ -96,7 +95,7 @@ void atualizarLivro(Livro biblioteca[], int totalLivros) {
 
     printf("\n--- ATUALIZAR LIVRO ---\n");
     exibirTodosLivros(biblioteca, totalLivros);
-    
+
     printf("Digite o codigo do livro que deseja atualizar: ");
     scanf("%d", &codigoBuscado);
     limparBuffer();
@@ -109,12 +108,10 @@ void atualizarLivro(Livro biblioteca[], int totalLivros) {
     }
 
     printf("\nDigite o novo titulo: ");
-    fgets(biblioteca[indice].titulo, sizeof(biblioteca[indice].titulo), stdin);
-    biblioteca[indice].titulo[strcspn(biblioteca[indice].titulo, "\n")] = '\0';
+    lerString(biblioteca[indice].titulo, sizeof(biblioteca[indice].titulo));
 
     printf("Digite o novo autor: ");
-    fgets(biblioteca[indice].autor, sizeof(biblioteca[indice].autor), stdin);
-    biblioteca[indice].autor[strcspn(biblioteca[indice].autor, "\n")] = '\0';
+    lerString(biblioteca[indice].autor, sizeof(biblioteca[indice].autor));
 
     printf("Digite o novo ano de publicacao: ");
     scanf("%d", &biblioteca[indice].ano);
@@ -132,7 +129,7 @@ void excluirLivro(Livro biblioteca[], int *totalLivros) {
 
     printf("\n--- REMOVER LIVRO ---\n");
     exibirTodosLivros(biblioteca, *totalLivros);
-    
+
     printf("\nDigite o codigo do livro que deseja remover: ");
     scanf("%d", &codigoBuscado);
     limparBuffer();
@@ -226,6 +223,11 @@ int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado
         }
     }
     return -1;
+}
+
+void lerString(char *buffer, int tamanho) {
+    fgets(buffer, tamanho, stdin);
+    buffer[strcspn(buffer, "\n")] = '\0';
 }
 
 int bibliotecaCheia(int totalLivros) {

@@ -12,7 +12,7 @@ int main() {
 
     carregarLivros(biblioteca, &totalLivros, &proximoCodigo);
 
-    do {
+    while (1) {
         printf("\n==========================================\n");
         printf("  SISTEMA DE GERENCIAMENTO DE BIBLIOTECA \n");
         printf("==========================================\n");
@@ -69,12 +69,11 @@ int main() {
             case 0:
                 salvarLivros(biblioteca, totalLivros);
                 printf("\nEncerrando o sistema... Ate logo!\n");
-                break;
+                return 0;
             default:
                 printf("\n[ERRO] Opcao inexistente. Tente novamente.\n");
         }
-
-    } while (opcao != 0);
+    }
 
     return 0;
 }
