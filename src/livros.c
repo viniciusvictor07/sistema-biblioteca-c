@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Funções principais
 void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
     if (bibliotecaCheia(*totalLivros)) return;
 
@@ -158,12 +159,7 @@ void exibirLivrosDisponiveis(Livro biblioteca[], int totalLivros) {
     int encontrados = 0;
     for (int i = 0; i < totalLivros; i++) {
         if (biblioteca[i].disponivel) {
-            printf("\nCodigo: %d | Titulo: %s | Autor: %s | Ano: %d\n",
-                   biblioteca[i].codigo,  //
-                   biblioteca[i].titulo,  //
-                   biblioteca[i].autor,   //
-                   biblioteca[i].ano);    //
-
+            exibirLivro(biblioteca[i]);
             encontrados++;
         }
     }
@@ -174,6 +170,7 @@ void exibirLivrosDisponiveis(Livro biblioteca[], int totalLivros) {
     printf("===========================\n");
 }
 
+// Funções extras
 void alterarStatusEmprestimo(Livro biblioteca[], int totalLivros) {
     if (bibliotecaVazia(totalLivros)) return;
 
@@ -216,6 +213,17 @@ void exibirEstatisticas(Livro biblioteca[], int totalLivros) {
 }
 
 // Funções auxiliares
+int pedirEBuscarIndice(Livro biblioteca[], int totalLivros) {
+    int codigo = lerInteiro("Digite o codigo do livro: ", 1, 999999);
+    int indice = buscarIndicePorCodigo(biblioteca, totalLivros, codigo);
+
+    if (indice == -1) {
+        printf("\n[ERRO] Livro com o codigo %d nao foi encontrado.\n", codigo);
+    }
+
+    return indice;
+}
+
 int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado) {
     for (int i = 0; i < totalLivros; i++) {
         if (biblioteca[i].codigo == codigoBuscado) {
@@ -223,6 +231,23 @@ int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado
         }
     }
     return -1;
+}
+
+int lerInteiro(const char *mensagem, int min, int max) {
+    int valor;
+    int resultado;
+
+    while (1) {
+        printf("%s", mensagem);
+        resultado = scanf("%d", &valor);
+        limparBuffer();
+
+        if (resultado == 1 && valor >= min && valor <= max) {
+            return valor;
+        }
+
+        printf("[ERRO] Entrada invalida. Digite um numero entre %d e %d.\n", min, max);
+    }
 }
 
 void lerString(char *buffer, int tamanho) {
