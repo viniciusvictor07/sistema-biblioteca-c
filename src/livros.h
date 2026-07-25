@@ -14,7 +14,8 @@ typedef struct {
     int disponivel;
 } Livro;
 
-// Funções principais
+// --- Funções Principais ---
+
 void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo);
 void exibirTodosLivros(Livro biblioteca[], int totalLivros);
 void buscarLivroPorCodigo(Livro biblioteca[], int totalLivros);
@@ -23,19 +24,30 @@ void atualizarLivro(Livro biblioteca[], int totalLivros);
 void excluirLivro(Livro biblioteca[], int *totalLivros);
 void exibirLivrosDisponiveis(Livro biblioteca[], int totalLivros);
 
-// Funções extras
+
+// --- Funções Extras ---
+
 void alterarStatusEmprestimo(Livro biblioteca[], int totalLivros);
 void exibirEstatisticas(Livro biblioteca[], int totalLivros);
 
-// Funções auxiliares
+
+// --- Funções Auxiliares ---
+
+// Validação e busca interna
 int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado);
 int pedirEBuscarIndice(Livro biblioteca[], int totalLivros);
 int bibliotecaCheia(int totalLivros);
 int bibliotecaVazia(int totalLivros);
+
+// Entrada e saída de dados
 int lerInteiro(const char *mensagem, int min, int max);
 void lerString(char *buffer, int tamanho);
 void exibirLivro(Livro livro);
-void limparBuffer();
+
+// Controle do terminal e fluxo
+void limparBuffer(void);
+void mostrarMenu(void);
 void limparTela(void);
 void pausar(void);
+
 #endif
