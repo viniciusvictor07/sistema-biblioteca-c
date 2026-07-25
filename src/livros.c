@@ -9,16 +9,16 @@ void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
 
     Livro novoLivro;
     novoLivro.codigo = *proximoCodigo;
-    
+
     printf("\n--- CADASTRO DE NOVO LIVRO ---\n");
     printf("Codigo: %d\n", novoLivro.codigo);
-    
+
     printf("Digite o titulo: ");
     lerString(novoLivro.titulo, sizeof(novoLivro.titulo));
-    
+
     printf("Digite o autor: ");
     lerString(novoLivro.autor, sizeof(novoLivro.autor));
-    
+
     printf("Digite o ano de publicacao: ");
     scanf("%d", &novoLivro.ano);
     limparBuffer();
@@ -73,8 +73,7 @@ void buscarLivroPorTitulo(Livro biblioteca[], int totalLivros) {
     char tituloBuscado[50];
     printf("\n--- BUSCAR LIVRO POR TITULO ---\n");
     printf("Digite o titulo do livro: ");
-    fgets(tituloBuscado, sizeof(tituloBuscado), stdin);
-    tituloBuscado[strcspn(tituloBuscado, "\n")] = '\0';
+    lerString(tituloBuscado, sizeof(tituloBuscado));
 
     int encontrados = 0;
     for (int i = 0; i < totalLivros; i++) {
@@ -115,6 +114,7 @@ void atualizarLivro(Livro biblioteca[], int totalLivros) {
 
     printf("Digite o novo ano de publicacao: ");
     scanf("%d", &biblioteca[indice].ano);
+    limparBuffer();
 
     printf("O livro esta disponivel? (1-Sim / 0-Nao): ");
     scanf("%d", &biblioteca[indice].disponivel);
@@ -226,8 +226,14 @@ int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado
 }
 
 void lerString(char *buffer, int tamanho) {
-    fgets(buffer, tamanho, stdin);
-    buffer[strcspn(buffer, "\n")] = '\0';
+    do {
+        fgets(buffer, tamanho, stdin);
+        buffer[strcspn(buffer, "\n")] = '\0';
+
+        if (buffer[0] == '\0') {
+            printf("O campo nao pode ficar em branco. Digite novamente: ");
+        }
+    } while (buffer[0] == '\0');
 }
 
 int bibliotecaCheia(int totalLivros) {
