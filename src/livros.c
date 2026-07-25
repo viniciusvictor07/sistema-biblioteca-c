@@ -227,7 +227,7 @@ int bibliotecaCheia(int totalLivros) {
 }
 
 int bibliotecaVazia(int totalLivros) {
-    if (totalLivros == 0) {
+    if (totalLivros <= 0) {
         printf("\n[AVISO] Nenhum livro cadastrado na biblioteca.\n");
         return 1;
     }
@@ -247,4 +247,17 @@ void exibirLivro(Livro livro) {
 void limparBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void limparTela(void) {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
+void pausar(void) {
+    printf("\nPressione ENTER para continuar...");
+    getchar();
 }

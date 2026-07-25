@@ -37,36 +37,57 @@ int main() {
         limparBuffer();
         switch (opcao) {
             case 1:
+                limparTela();
                 cadastrarLivro(biblioteca, &totalLivros, &proximoCodigo);
+                pausar();
                 break;
             case 2:
+                limparTela();
                 exibirTodosLivros(biblioteca, totalLivros);
+                pausar();
                 break;
             case 3:
+                limparTela();
                 buscarLivroPorCodigo(biblioteca, totalLivros);
+                pausar();
                 break;
             case 4:
+                limparTela();
                 buscarLivroPorTitulo(biblioteca, totalLivros);
+                pausar();
                 break;
             case 5:
+                limparTela();
                 atualizarLivro(biblioteca, totalLivros);
+                pausar();
                 break;
             case 6:
+                limparTela();
                 excluirLivro(biblioteca, &totalLivros);
+                pausar();
                 break;
             case 7:
+                limparTela();
                 exibirLivrosDisponiveis(biblioteca, totalLivros);
+                pausar();
                 break;
             case 8:
+                limparTela();
                 alterarStatusEmprestimo(biblioteca, totalLivros);
+                pausar();
                 break;
             case 9:
+                limparTela();
                 exibirEstatisticas(biblioteca, totalLivros);
+                pausar();
                 break;
             case 10:
+                limparTela();
                 salvarLivros(biblioteca, totalLivros);
+                pausar();
                 break;
             case 0:
+                limparTela();
                 salvarLivros(biblioteca, totalLivros);
                 printf("\nEncerrando o sistema... Ate logo!\n");
                 return 0;
