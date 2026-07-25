@@ -20,13 +20,8 @@ void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
     printf("Digite o autor: ");
     lerString(novoLivro.autor, sizeof(novoLivro.autor));
 
-    printf("Digite o ano de publicacao: ");
-    scanf("%d", &novoLivro.ano);
-    limparBuffer();
-
-    printf("O livro esta disponivel? (1- Sim / 0- Nao): ");
-    scanf("%d", &novoLivro.disponivel);
-    limparBuffer();
+    novoLivro.ano = lerInteiro("Digite o ano de publicacao: ", 1, ANO_ATUAL);
+    novoLivro.disponivel = lerInteiro("O livro esta disponivel? (1 - Sim / 0 - Nao): ", 0, 1);
 
     biblioteca[*totalLivros] = novoLivro;
     (*totalLivros)++;
@@ -52,20 +47,11 @@ void exibirTodosLivros(Livro biblioteca[], int totalLivros) {
 void buscarLivroPorCodigo(Livro biblioteca[], int totalLivros) {
     if (bibliotecaVazia(totalLivros)) return;
 
-    int codigoBuscado;
     printf("\n--- BUSCAR LIVRO ---\n");
-    printf("Digite o codigo do livro que deseja buscar: ");
-    scanf("%d", &codigoBuscado);
-    limparBuffer();
-
-    int indice = buscarIndicePorCodigo(biblioteca, totalLivros, codigoBuscado);
-
-    if (indice == -1) {
-        printf("\n[ERRO] Livro com o codigo %d nao foi encontrado.\n", codigoBuscado);
-        return;
+    int indice = pedirEBuscarIndice(biblioteca, totalLivros);
+    if (indice != -1) {
+        exibirLivro(biblioteca[indice]);
     }
-
-    exibirLivro(biblioteca[indice]);
 }
 
 void buscarLivroPorTitulo(Livro biblioteca[], int totalLivros) {
@@ -91,21 +77,12 @@ void buscarLivroPorTitulo(Livro biblioteca[], int totalLivros) {
 
 void atualizarLivro(Livro biblioteca[], int totalLivros) {
     if (bibliotecaVazia(totalLivros)) return;
-    int codigoBuscado;
 
     printf("\n--- ATUALIZAR LIVRO ---\n");
     exibirTodosLivros(biblioteca, totalLivros);
 
-    printf("Digite o codigo do livro que deseja atualizar: ");
-    scanf("%d", &codigoBuscado);
-    limparBuffer();
-
-    int indice = buscarIndicePorCodigo(biblioteca, totalLivros, codigoBuscado);
-
-    if (indice == -1) {
-        printf("\n[ERRO] Livro com o codigo %d nao foi encontrado.\n", codigoBuscado);
-        return;
-    }
+    int indice = pedirEBuscarIndice(biblioteca, totalLivros);
+    if (indice == -1) return;
 
     printf("\nDigite o novo titulo: ");
     lerString(biblioteca[indice].titulo, sizeof(biblioteca[indice].titulo));
@@ -113,41 +90,26 @@ void atualizarLivro(Livro biblioteca[], int totalLivros) {
     printf("Digite o novo autor: ");
     lerString(biblioteca[indice].autor, sizeof(biblioteca[indice].autor));
 
-    printf("Digite o novo ano de publicacao: ");
-    scanf("%d", &biblioteca[indice].ano);
-    limparBuffer();
-
-    printf("O livro esta disponivel? (1-Sim / 0-Nao): ");
-    scanf("%d", &biblioteca[indice].disponivel);
-    limparBuffer();
+    biblioteca[indice].ano = lerInteiro("Digite o novo ano de publicacao: ", 1, ANO_ATUAL);
+    biblioteca[indice].disponivel = lerInteiro("O livro esta disponivel? (1 - Sim / 0 - Nao): ", 0, 1);
 
     printf("\n[SUCESSO] Informacoes do livro atualizadas com sucesso!\n");
 }
 
 void excluirLivro(Livro biblioteca[], int *totalLivros) {
     if (bibliotecaVazia(*totalLivros)) return;
-    int codigoBuscado;
 
     printf("\n--- REMOVER LIVRO ---\n");
     exibirTodosLivros(biblioteca, *totalLivros);
 
-    printf("\nDigite o codigo do livro que deseja remover: ");
-    scanf("%d", &codigoBuscado);
-    limparBuffer();
-
-    int indice = buscarIndicePorCodigo(biblioteca, *totalLivros, codigoBuscado);
-
-    if (indice == -1) {
-        printf("\n[ERRO] Livro com o codigo %d nao foi encontrado.\n", codigoBuscado);
-        return;
-    }
+    int indice = pedirEBuscarIndice(biblioteca, *totalLivros);
+    if (indice == -1) return;
 
     for (int i = indice; i < *totalLivros - 1; i++) {
         biblioteca[i] = biblioteca[i + 1];
     }
 
     (*totalLivros)--;
-
     printf("\nLivro removido com sucesso!\n");
 }
 
@@ -174,21 +136,16 @@ void exibirLivrosDisponiveis(Livro biblioteca[], int totalLivros) {
 void alterarStatusEmprestimo(Livro biblioteca[], int totalLivros) {
     if (bibliotecaVazia(totalLivros)) return;
 
-    int codigoBuscado;
     printf("\n--- ALTERAR STATUS DE EMPRESTIMO ---\n");
-    printf("Digite o codigo do livro: ");
-    scanf("%d", &codigoBuscado);
-    limparBuffer();
+    exibirTodosLivros(biblioteca, totalLivros);
 
-    int indice = buscarIndicePorCodigo(biblioteca, totalLivros, codigoBuscado);
-
-    if (indice == -1) {
-        printf("\n[ERRO] Livro com o codigo %d nao foi encontrado.\n", codigoBuscado);
-        return;
-    }
+    int indice = pedirEBuscarIndice(biblioteca, totalLivros);
+    if (indice == -1) return;
 
     biblioteca[indice].disponivel = !biblioteca[indice].disponivel;
-    printf("\n[SUCESSO] Status alterado para: %s\n", biblioteca[indice].disponivel ? "Disponivel" : "Emprestado");
+    printf("\n[SUCESSO] Status do livro '%s' alterado para: %s\n",
+           biblioteca[indice].titulo,  //
+           biblioteca[indice].disponivel ? "Disponivel" : "Emprestado");
 }
 
 void exibirEstatisticas(Livro biblioteca[], int totalLivros) {

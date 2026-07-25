@@ -2,6 +2,7 @@
 #define LIVROS_H
 
 #define MAX_LIVROS 100
+#define ANO_ATUAL 2026
 
 typedef struct {
     int codigo;
