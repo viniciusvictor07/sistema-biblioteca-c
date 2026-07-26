@@ -11,11 +11,12 @@ void salvarLivros(Livro biblioteca[], int totalLivros) {
     }
 
     for (int i = 0; i < totalLivros; i++) {
-        fprintf(arquivo, "%d;%s;%s;%d;%d\n",
-                biblioteca[i].codigo,  //
-                biblioteca[i].titulo,  //
-                biblioteca[i].autor,   //
-                biblioteca[i].ano,     //
+        fprintf(arquivo, "%d;%s;%s;%s;%d;%d\n",
+                biblioteca[i].codigo,     //
+                biblioteca[i].titulo,     //
+                biblioteca[i].autor,      //
+                biblioteca[i].categoria,  //
+                biblioteca[i].ano,        //
                 biblioteca[i].disponivel);
     }
 
@@ -33,12 +34,13 @@ void carregarLivros(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
 
     int maiorCodigo = 0;
     *totalLivros = 0;
-    while (fscanf(arquivo, "%d;%49[^;];%49[^;];%d;%d\n",
-                  &biblioteca[*totalLivros].codigo,  //
-                  biblioteca[*totalLivros].titulo,   //
-                  biblioteca[*totalLivros].autor,    //
-                  &biblioteca[*totalLivros].ano,     //
-                  &biblioteca[*totalLivros].disponivel) == 5) {
+    while (fscanf(arquivo, "%d;%49[^;];%49[^;];%29[^;];%d;%d\n",
+                  &biblioteca[*totalLivros].codigo,     //
+                  biblioteca[*totalLivros].titulo,      //
+                  biblioteca[*totalLivros].autor,       //
+                  biblioteca[*totalLivros].categoria,  //
+                  &biblioteca[*totalLivros].ano,        //
+                  &biblioteca[*totalLivros].disponivel) == 6) {
         if (biblioteca[*totalLivros].codigo > maiorCodigo) {
             maiorCodigo = biblioteca[*totalLivros].codigo;
         }

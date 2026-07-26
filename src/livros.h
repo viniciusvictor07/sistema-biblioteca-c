@@ -10,6 +10,7 @@ typedef struct {
     int codigo;
     char titulo[50];
     char autor[50];
+    char categoria[30];
     int ano;
     int disponivel;
 } Livro;
@@ -24,12 +25,11 @@ void atualizarLivro(Livro biblioteca[], int totalLivros);
 void excluirLivro(Livro biblioteca[], int *totalLivros);
 void exibirLivrosDisponiveis(Livro biblioteca[], int totalLivros);
 
-
 // --- Funções Extras ---
 
 void alterarStatusEmprestimo(Livro biblioteca[], int totalLivros);
 void exibirEstatisticas(Livro biblioteca[], int totalLivros);
-
+void buscarLivrosPorCategoria(Livro biblioteca[], int totalLivros);
 
 // --- Funções Auxiliares ---
 
@@ -42,6 +42,7 @@ int bibliotecaVazia(int totalLivros);
 // Entrada e saída de dados
 int lerInteiro(const char *mensagem, int min, int max);
 void lerString(char *buffer, int tamanho);
+const char* escolherCategoria(void);
 void exibirLivro(Livro livro);
 
 // Controle do terminal e fluxo

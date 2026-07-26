@@ -20,6 +20,8 @@ void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
     printf("Digite o autor: ");
     lerString(novoLivro.autor, sizeof(novoLivro.autor));
 
+    strcpy(novoLivro.categoria, escolherCategoria());
+
     novoLivro.ano = lerInteiro("Digite o ano de publicacao: ", 1, ANO_ATUAL);
     novoLivro.disponivel = lerInteiro("O livro esta disponivel? (1 - Sim / 0 - Nao): ", 0, 1);
 
@@ -35,12 +37,7 @@ void exibirTodosLivros(Livro biblioteca[], int totalLivros) {
 
     printf("\n=== LISTA DE LIVROS CADASTRADOS ===\n");
     for (int i = 0; i < totalLivros; i++) {
-        printf("Codigo: %d | Titulo: %s | Autor: %s | Ano: %d | Status: %s\n",
-               biblioteca[i].codigo,  //
-               biblioteca[i].titulo,  //
-               biblioteca[i].autor,   //
-               biblioteca[i].ano,     //
-               biblioteca[i].disponivel ? "Disponivel" : "Emprestado");
+        exibirLivro(biblioteca[i]);
     }
 }
 
@@ -89,6 +86,9 @@ void atualizarLivro(Livro biblioteca[], int totalLivros) {
 
     printf("Digite o novo autor: ");
     lerString(biblioteca[indice].autor, sizeof(biblioteca[indice].autor));
+
+    printf("Digite a nova categoria: ");
+    strcpy(biblioteca[indice].categoria, escolherCategoria());
 
     biblioteca[indice].ano = lerInteiro("Digite o novo ano de publicacao: ", 1, ANO_ATUAL);
     biblioteca[indice].disponivel = lerInteiro("O livro esta disponivel? (1 - Sim / 0 - Nao): ", 0, 1);
@@ -169,6 +169,29 @@ void exibirEstatisticas(Livro biblioteca[], int totalLivros) {
     printf("==================================\n");
 }
 
+void buscarLivrosPorCategoria(Livro biblioteca[], int totalLivros) {
+    if (bibliotecaVazia(totalLivros)) {
+        return;
+    }
+
+    const char *categoriaSelecionada = escolherCategoria();
+    int encontrados = 0;
+
+    limparTela();
+    printf("=== LIVROS DA CATEGORIA: %s ===\n\n", categoriaSelecionada);
+
+    for (int i = 0; i < totalLivros; i++) {
+        if (strcmp(biblioteca[i].categoria, categoriaSelecionada) == 0) {
+            exibirLivro(biblioteca[i]);
+            encontrados++;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("Nenhum livro encontrado para a categoria '%s'.\n", categoriaSelecionada);
+    }
+}
+
 // --- Funções Auxiliares ---
 
 // Validação e busca interna
@@ -237,14 +260,55 @@ void lerString(char *buffer, int tamanho) {
     } while (buffer[0] == '\0');
 }
 
+const char *escolherCategoria(void) {
+    printf("\n--- CATEGORIAS ---\n");
+    printf("1. Ficcao Cientifica\n");
+    printf("2. Fantasia\n");
+    printf("3. Terror / Suspense\n");
+    printf("4. Romance\n");
+    printf("5. Historia\n");
+    printf("6. Biografia\n");
+    printf("7. Autoajuda\n");
+    printf("8. Tecnologia / Programacao\n");
+    printf("9. Didatico / Academico\n");
+    printf("10. Outros\n");
+
+    int opcao = lerInteiro("Digite a opcao desejada: ", 1, 10);
+
+    switch (opcao) {
+        case 1:
+            return "Ficcao Cientifica";
+        case 2:
+            return "Fantasia";
+        case 3:
+            return "Terror / Suspense";
+        case 4:
+            return "Romance";
+        case 5:
+            return "Historia";
+        case 6:
+            return "Biografia";
+        case 7:
+            return "Autoajuda";
+        case 8:
+            return "Tecnologia / Programacao";
+        case 9:
+            return "Didatico / Academico";
+        case 10:
+            return "Outros";
+        default:
+            return "Outros";
+    }
+}
+
 void exibirLivro(Livro livro) {
-    printf("\n=== LIVRO ENCONTRADO ===\n");
-    printf("Codigo: %d\n", livro.codigo);
-    printf("Titulo: %s\n", livro.titulo);
-    printf("Autor: %s\n", livro.autor);
-    printf("Ano: %d\n", livro.ano);
-    printf("Status: %s\n", livro.disponivel ? "Disponivel" : "Emprestado");
-    printf("=========================\n");
+    printf("Codigo: %d | Titulo: %s | Autor: %s | Categoria: %s | Ano: %d | Status: %s\n",
+           livro.codigo,     //
+           livro.titulo,     //
+           livro.autor,      //
+           livro.categoria,  //
+           livro.ano,        //
+           livro.disponivel ? "Disponivel" : "Emprestado");
 }
 
 // Controle do terminal e fluxo
@@ -261,11 +325,6 @@ void limparTela(void) {
 #endif
 }
 
-void pausar(void) {
-    printf("\nPressione ENTER para continuar...");
-    getchar();
-}
-
 void mostrarMenu() {
     printf("\n==========================================\n");
     printf("  SISTEMA DE GERENCIAMENTO DE BIBLIOTECA \n");
@@ -279,8 +338,14 @@ void mostrarMenu() {
     printf("7.  Exibir livros disponiveis\n");
     printf("8.  Emprestar/Devolver livro (Extra)\n");
     printf("9.  Exibir estatisticas da biblioteca (Extra)\n");
-    printf("10. Salvar dados no arquivo\n");
+    printf("10. Exibir livros por categoria (Extra)\n");
+    printf("11. Salvar dados no arquivo\n");
     printf("0.  Sair\n");
     printf("------------------------------------------\n");
     printf("Escolha uma opcao: ");
+}
+
+void pausar(void) {
+    printf("\nPressione ENTER para continuar...");
+    limparBuffer();
 }
