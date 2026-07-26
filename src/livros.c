@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Funções principais
+// --- Funções Principais ---
 void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
     if (bibliotecaCheia(*totalLivros)) return;
 
@@ -132,7 +132,7 @@ void exibirLivrosDisponiveis(Livro biblioteca[], int totalLivros) {
     printf("===========================\n");
 }
 
-// Funções extras
+// --- Funções Extras ---
 void alterarStatusEmprestimo(Livro biblioteca[], int totalLivros) {
     if (bibliotecaVazia(totalLivros)) return;
 
@@ -169,7 +169,9 @@ void exibirEstatisticas(Livro biblioteca[], int totalLivros) {
     printf("==================================\n");
 }
 
-// Funções auxiliares
+// --- Funções Auxiliares ---
+
+// Validação e busca interna
 int pedirEBuscarIndice(Livro biblioteca[], int totalLivros) {
     int codigo = lerInteiro("Digite o codigo do livro: ", 1, 999999);
     int indice = buscarIndicePorCodigo(biblioteca, totalLivros, codigo);
@@ -190,6 +192,23 @@ int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado
     return -1;
 }
 
+int bibliotecaCheia(int totalLivros) {
+    if (totalLivros >= MAX_LIVROS) {
+        printf("\n[AVISO] A biblioteca esta cheia! Nao e possivel cadastrar mais livros.\n");
+        return 1;
+    }
+    return 0;
+}
+
+int bibliotecaVazia(int totalLivros) {
+    if (totalLivros <= 0) {
+        printf("\n[AVISO] Nenhum livro cadastrado na biblioteca.\n");
+        return 1;
+    }
+    return 0;
+}
+
+// Entrada e saída de dados
 int lerInteiro(const char *mensagem, int min, int max) {
     int valor;
     int resultado;
@@ -218,22 +237,6 @@ void lerString(char *buffer, int tamanho) {
     } while (buffer[0] == '\0');
 }
 
-int bibliotecaCheia(int totalLivros) {
-    if (totalLivros >= MAX_LIVROS) {
-        printf("\n[AVISO] A biblioteca esta cheia! Nao e possivel cadastrar mais livros.\n");
-        return 1;
-    }
-    return 0;
-}
-
-int bibliotecaVazia(int totalLivros) {
-    if (totalLivros <= 0) {
-        printf("\n[AVISO] Nenhum livro cadastrado na biblioteca.\n");
-        return 1;
-    }
-    return 0;
-}
-
 void exibirLivro(Livro livro) {
     printf("\n=== LIVRO ENCONTRADO ===\n");
     printf("Codigo: %d\n", livro.codigo);
@@ -244,6 +247,7 @@ void exibirLivro(Livro livro) {
     printf("=========================\n");
 }
 
+// Controle do terminal e fluxo
 void limparBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
