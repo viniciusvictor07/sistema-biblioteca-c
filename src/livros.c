@@ -192,6 +192,30 @@ void buscarLivrosPorCategoria(Livro biblioteca[], int totalLivros) {
     }
 }
 
+void buscarLivrosPorAutor(Livro biblioteca[], int totalLivros) {
+    if (bibliotecaVazia(totalLivros)) return;
+
+    char autorBusca[50];
+    printf("Digite o nome do autor: ");
+    lerString(autorBusca, sizeof(autorBusca));
+
+    int encontrados = 0;
+    printf("\n--- RESULTADO DA BUSCA ---\n");
+
+    for (int i = 0; i < totalLivros; i++) {
+        if (strstr(biblioteca[i].autor, autorBusca) != NULL) {
+            exibirLivro(biblioteca[i]);
+            encontrados++;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("Nenhum livro encontrado para o autor informado.\n");
+    } else {
+        printf("\nTotal de livros encontrados: %d\n", encontrados);
+    }
+}
+
 // --- Funções Auxiliares ---
 
 // Validação e busca interna
@@ -336,10 +360,11 @@ void mostrarMenu() {
     printf("5.  Atualizar dados de um livro\n");
     printf("6.  Excluir livro\n");
     printf("7.  Exibir livros disponiveis\n");
-    printf("8.  Emprestar/Devolver livro (Extra)\n");
-    printf("9.  Exibir estatisticas da biblioteca (Extra)\n");
-    printf("10. Exibir livros por categoria (Extra)\n");
-    printf("11. Salvar dados no arquivo\n");
+    printf("8.  Salvar dados no arquivo\n");
+    printf("9.  Emprestar/Devolver livro (Extra)\n");
+    printf("10. Exibir estatisticas da biblioteca (Extra)\n");
+    printf("11. Exibir livros por categoria (Extra)\n");
+    printf("12. Exibir livros por autor (Extra)\n");
     printf("0.  Sair\n");
     printf("------------------------------------------\n");
     printf("Escolha uma opcao: ");

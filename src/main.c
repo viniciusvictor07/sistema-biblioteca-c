@@ -14,7 +14,7 @@ int main() {
 
     while (1) {
         mostrarMenu();
-        opcao = lerInteiro("", 0, 11);
+        opcao = lerInteiro("", 0, 12);
         switch (opcao) {
             case 1:
                 limparTela();
@@ -53,22 +53,27 @@ int main() {
                 break;
             case 8:
                 limparTela();
-                alterarStatusEmprestimo(biblioteca, totalLivros);
+                salvarLivros(biblioteca, totalLivros);
                 pausar();
                 break;
             case 9:
                 limparTela();
-                exibirEstatisticas(biblioteca, totalLivros);
+                alterarStatusEmprestimo(biblioteca, totalLivros);
                 pausar();
                 break;
             case 10:
                 limparTela();
-                buscarLivrosPorCategoria(biblioteca, totalLivros);
+                exibirEstatisticas(biblioteca, totalLivros);
                 pausar();
                 break;
             case 11:
                 limparTela();
-                salvarLivros(biblioteca, totalLivros);
+                buscarLivrosPorCategoria(biblioteca, totalLivros);
+                pausar();
+                break;
+            case 12:
+                limparTela();
+                buscarLivrosPorAutor(biblioteca, totalLivros);
                 pausar();
                 break;
             case 0:

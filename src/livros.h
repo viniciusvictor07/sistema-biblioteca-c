@@ -30,6 +30,7 @@ void exibirLivrosDisponiveis(Livro biblioteca[], int totalLivros);
 void alterarStatusEmprestimo(Livro biblioteca[], int totalLivros);
 void exibirEstatisticas(Livro biblioteca[], int totalLivros);
 void buscarLivrosPorCategoria(Livro biblioteca[], int totalLivros);
+void buscarLivrosPorAutor(Livro biblioteca[], int totalLivros);
 
 // --- Funções Auxiliares ---
 
