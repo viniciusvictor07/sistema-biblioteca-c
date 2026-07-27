@@ -35,6 +35,7 @@ typedef struct {
     int codigo;           // Identificador único sequencial
     char titulo[50];      // Título da obra
     char autor[50];       // Autor da obra
+    char categoria[30];   // Categoria da obra
     int ano;              // Ano de publicação (validado de 1 até ANO_ATUAL)
     int disponivel;       // Status (1 - Disponível / 0 - Emprestado)
 } Livro;
@@ -63,13 +64,13 @@ Para rodar a aplicação:
 Os dados são armazenados linha por linha no arquivo de texto utilizando o seguinte padrão:
 
 ```text
-CODIGO;TITULO;AUTOR;ANO;DISPONIVEL
+CODIGO;TITULO;AUTOR;CATEGORIA;ANO;DISPONIVEL
 ```
 
 **Exemplo:**
 ```text
-1;Dom Casmurro;Machado de Assis;1899;1
-2;O Hobbit;J.R.R. Tolkien;1937;0
+1;Dom Casmurro;Machado de Assis;Romance;1899;1
+2;O Hobbit;J.R.R. Tolkien;Fantasia;1937;0
 ```
 
 ---
