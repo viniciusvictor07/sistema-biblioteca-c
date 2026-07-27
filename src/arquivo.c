@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void salvarLivros(Livro biblioteca[], int totalLivros) {
+void salvarLivros(const Livro biblioteca[], int totalLivros) {
     FILE *arquivo = fopen(CAMINHO_DADOS, "w");
     if (arquivo == NULL) {
         printf("\n[ERRO] Nao foi possivel criar/abrir o arquivo para salvar.\n");
@@ -34,13 +34,16 @@ void carregarLivros(Livro biblioteca[], int *totalLivros, int *proximoCodigo) {
 
     int maiorCodigo = 0;
     *totalLivros = 0;
-    while (fscanf(arquivo, "%d;%49[^;];%49[^;];%29[^;];%d;%d\n",
-                  &biblioteca[*totalLivros].codigo,     //
-                  biblioteca[*totalLivros].titulo,      //
-                  biblioteca[*totalLivros].autor,       //
+
+    while (*totalLivros < MAX_LIVROS && 
+           fscanf(arquivo, "%d;%49[^;];%49[^;];%29[^;];%d;%d\n", 
+                  &biblioteca[*totalLivros].codigo,    //
+                  biblioteca[*totalLivros].titulo,     //
+                  biblioteca[*totalLivros].autor,      //
                   biblioteca[*totalLivros].categoria,  //
-                  &biblioteca[*totalLivros].ano,        //
+                  &biblioteca[*totalLivros].ano,       //
                   &biblioteca[*totalLivros].disponivel) == 6) {
+        
         if (biblioteca[*totalLivros].codigo > maiorCodigo) {
             maiorCodigo = biblioteca[*totalLivros].codigo;
         }

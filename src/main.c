@@ -13,6 +13,7 @@ int main() {
     carregarLivros(biblioteca, &totalLivros, &proximoCodigo);
 
     while (1) {
+        limparTela();
         mostrarMenu();
         opcao = lerInteiro("", 0, 12);
         switch (opcao) {
@@ -79,7 +80,7 @@ int main() {
             case 0:
                 limparTela();
                 salvarLivros(biblioteca, totalLivros);
-                printf("\nEncerrando o sistema... Ate logo!\n");
+                printf("\nDados salvos. Encerrando o sistema... Ate logo!\n");
                 return 0;
             default:
                 printf("\n[ERRO] Opcao inexistente. Tente novamente.\n");

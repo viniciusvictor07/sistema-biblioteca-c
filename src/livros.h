@@ -18,25 +18,25 @@ typedef struct {
 // --- Funções Principais ---
 
 void cadastrarLivro(Livro biblioteca[], int *totalLivros, int *proximoCodigo);
-void exibirTodosLivros(Livro biblioteca[], int totalLivros);
-void buscarLivroPorCodigo(Livro biblioteca[], int totalLivros);
-void buscarLivroPorTitulo(Livro biblioteca[], int totalLivros);
+void exibirTodosLivros(const Livro biblioteca[], int totalLivros);
+void buscarLivroPorCodigo(const Livro biblioteca[], int totalLivros);
+void buscarLivroPorTitulo(const Livro biblioteca[], int totalLivros);
 void atualizarLivro(Livro biblioteca[], int totalLivros);
 void excluirLivro(Livro biblioteca[], int *totalLivros);
-void exibirLivrosDisponiveis(Livro biblioteca[], int totalLivros);
+void exibirLivrosDisponiveis(const Livro biblioteca[], int totalLivros);
 
 // --- Funções Extras ---
 
 void alterarStatusEmprestimo(Livro biblioteca[], int totalLivros);
-void exibirEstatisticas(Livro biblioteca[], int totalLivros);
-void buscarLivrosPorCategoria(Livro biblioteca[], int totalLivros);
-void buscarLivrosPorAutor(Livro biblioteca[], int totalLivros);
+void exibirEstatisticas(const Livro biblioteca[], int totalLivros);
+void buscarLivrosPorCategoria(const Livro biblioteca[], int totalLivros);
+void buscarLivrosPorAutor(const Livro biblioteca[], int totalLivros);
 
 // --- Funções Auxiliares ---
 
 // Validação e busca interna
-int buscarIndicePorCodigo(Livro biblioteca[], int totalLivros, int codigoBuscado);
-int pedirEBuscarIndice(Livro biblioteca[], int totalLivros);
+int buscarIndicePorCodigo(const Livro biblioteca[], int totalLivros, int codigoBuscado);
+int pedirEBuscarIndice(const Livro biblioteca[], int totalLivros);
 int bibliotecaCheia(int totalLivros);
 int bibliotecaVazia(int totalLivros);
 
