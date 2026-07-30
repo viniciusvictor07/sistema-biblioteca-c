@@ -43,13 +43,13 @@ int bibliotecaVazia(int totalLivros);
 // Entrada e saída de dados
 int lerInteiro(const char *mensagem, int min, int max);
 void lerString(char *buffer, int tamanho);
-const char* escolherCategoria(void);
+const char* escolherCategoria();
 void exibirLivro(Livro livro);
 
 // Controle do terminal e fluxo
-void limparBuffer(void);
-void mostrarMenu(void);
-void limparTela(void);
-void pausar(void);
+void limparBuffer();
+void mostrarMenu();
+void limparTela();
+void pausar();
 
 #endif

@@ -283,7 +283,7 @@ void lerString(char *buffer, int tamanho) {
     } while (buffer[0] == '\0');
 }
 
-const char *escolherCategoria(void) {
+const char *escolherCategoria() {
     static const char *categorias[] = {
         "Ficcao Cientifica",
         "Fantasia",
@@ -325,7 +325,7 @@ void limparBuffer() {
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-void limparTela(void) {
+void limparTela() {
 #ifdef _WIN32
     system("cls");
 #else
@@ -354,7 +354,7 @@ void mostrarMenu() {
     printf("Escolha uma opcao: ");
 }
 
-void pausar(void) {
+void pausar() {
     printf("\nPressione ENTER para continuar...");
     limparBuffer();
 }
